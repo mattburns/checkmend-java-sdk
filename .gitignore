@@ -1,0 +1,7 @@
+*~
+checkmend-java-sdk/bin
+checkmend-java-sdk/ant-bin
+checkmend-java-sdk/dist
+checkmend-java-sdk/test-bin
+checkmend-java-sdk/test-results
+checkmend-java-sdk/src/test/uk/co/mattburns/checkmend/test-settings.properties
