@@ -3,11 +3,13 @@ package uk.co.mattburns.checkmend;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.Date;
 import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.co.mattburns.checkmend.Activity.ActivityType;
 import uk.co.mattburns.checkmend.Property.Category;
 
 public class CheckmendTest {
@@ -111,6 +113,34 @@ public class CheckmendTest {
             long propertyid = checkmend.registerProperty(property);
 
             checkmend.removeProperty(propertyid);
+        } finally {
+            checkmend.removePerson(personid);
+        }
+    }
+
+    @Test
+    public void can_register_activity() {
+        Person bob = new Person.PersonBuilder("ref123").withFamilyname("smith")
+                .withOthernames("bob").build();
+
+        Checkmend checkmend = new Checkmend(partnerid, secretKey, System.out);
+
+        long personid = checkmend.registerPerson(bob);
+
+        try {
+            Property property = new Property.PropertyBuilder(personid,
+                    Category.Camera, "Canon", "123").withModel("7D")
+                    .withDescription("My camera").build();
+
+            long propertyid = checkmend.registerProperty(property);
+
+            try {
+                Activity activity = new Activity(propertyid,
+                        ActivityType.stolen, new Date());
+                checkmend.registerActivity(activity);
+            } finally {
+                checkmend.removeProperty(propertyid);
+            }
         } finally {
             checkmend.removePerson(personid);
         }

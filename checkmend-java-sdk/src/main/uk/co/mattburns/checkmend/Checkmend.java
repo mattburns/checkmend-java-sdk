@@ -160,6 +160,20 @@ public class Checkmend {
         throwIfBad(response);
     }
 
+    public void registerActivity(Activity activity) {
+        String json = activity.toJson();
+        String auth = generateSignatureHash(partnerid, secretKey, json);
+
+        ClientResponse response = webResource
+                .path("activity/" + activity.getPropertyid())
+                .header("Authorization", "Basic " + auth)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .post(ClientResponse.class, json);
+
+        throwIfBad(response);
+    }
+
     private void throwIfBad(ClientResponse response) {
         if (response.getStatus() < 200 || response.getStatus() >= 300) {
             throw toError(response);
