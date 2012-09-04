@@ -52,13 +52,7 @@ public class Person {
     }
 
     public String toJson() {
-        // GsonBuilder builder = new GsonBuilder();
-        // builder.registerTypeAdapter(Person.class, new
-        // PersonJsonSerializer());
-        // Gson gson = builder.create();
-
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-
         return gson.toJson(this);
     }
 

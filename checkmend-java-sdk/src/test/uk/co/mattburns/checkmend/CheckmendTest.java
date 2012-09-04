@@ -8,6 +8,8 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.co.mattburns.checkmend.Property.Category;
+
 public class CheckmendTest {
 
     private long partnerid;
@@ -89,6 +91,28 @@ public class CheckmendTest {
             assertEquals(801, e.getErrors().get(0).getId());
             assertEquals("The Person ID supplied is invalid.", e.getErrors()
                     .get(0).getMessage());
+        }
+    }
+
+    @Test
+    public void can_register_property() {
+        Person bob = new Person.PersonBuilder("ref123").withFamilyname("smith")
+                .withOthernames("bob").build();
+
+        Checkmend checkmend = new Checkmend(partnerid, secretKey, System.out);
+
+        long personid = checkmend.registerPerson(bob);
+
+        try {
+            Property property = new Property.PropertyBuilder(personid,
+                    Category.Camera, "Canon", "123").withModel("7D")
+                    .withDescription("My camera").build();
+
+            long propertyid = checkmend.registerProperty(property);
+
+            checkmend.removeProperty(propertyid);
+        } finally {
+            checkmend.removePerson(personid);
         }
     }
 }

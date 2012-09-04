@@ -92,8 +92,14 @@ public class Checkmend {
         webResource = client.resource(URL);
     }
 
+    /**
+     * Register a new Person
+     * 
+     * @param person
+     * @return The personid of the created Person. You will need this to make
+     *         changes.
+     */
     public long registerPerson(Person person) {
-
         String json = person.toJson();
         String auth = generateSignatureHash(partnerid, secretKey, json);
 
@@ -111,11 +117,41 @@ public class Checkmend {
         return dataObject.get("personid").getAsLong();
     }
 
-    public void removePerson(long personId) {
-
+    public void removePerson(long personid) {
         String auth = generateSignatureHash(partnerid, secretKey, "");
 
-        ClientResponse response = webResource.path("remove/person/" + personId)
+        ClientResponse response = webResource.path("remove/person/" + personid)
+                .header("Authorization", "Basic " + auth)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .post(ClientResponse.class);
+
+        throwIfBad(response);
+    }
+
+    public long registerProperty(Property property) {
+        String json = property.toJson();
+        String auth = generateSignatureHash(partnerid, secretKey, json);
+
+        ClientResponse response = webResource.path("property")
+                .header("Authorization", "Basic " + auth)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .post(ClientResponse.class, json);
+
+        throwIfBad(response);
+
+        JsonParser parser = new JsonParser();
+        JsonObject dataObject = parser.parse(response.getEntity(String.class))
+                .getAsJsonObject();
+        return dataObject.get("propertyid").getAsLong();
+    }
+
+    public void removeProperty(long propertyid) {
+        String auth = generateSignatureHash(partnerid, secretKey, "");
+
+        ClientResponse response = webResource
+                .path("remove/property/" + propertyid)
                 .header("Authorization", "Basic " + auth)
                 .type(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
