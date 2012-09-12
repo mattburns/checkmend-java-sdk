@@ -7,6 +7,9 @@ public class CheckmendError extends RuntimeException {
 
     private List<Error> errors;
 
+    public CheckmendError() {
+    }
+
     public CheckmendError(List<Error> errors) {
         this.errors = errors;
     }
@@ -15,9 +18,19 @@ public class CheckmendError extends RuntimeException {
         return errors;
     }
 
-    public class Error {
+    @Override
+    public String toString() {
+        return super.toString() + errors.toString();
+    }
+
+    public static class Error {
         private String message;
         private int id;
+
+        // no arg constructor for gson
+        public Error() {
+
+        }
 
         public Error(String message, int id) {
             this.message = message;
@@ -30,6 +43,11 @@ public class CheckmendError extends RuntimeException {
 
         public int getId() {
             return id;
+        }
+
+        @Override
+        public String toString() {
+            return id + ":" + message;
         }
     }
 }

@@ -184,13 +184,13 @@ public class Checkmend {
         return jsonToCheckMENDError(response.getEntity(String.class));
     }
 
-    static CheckmendError jsonToCheckMENDError(String json) {
+    public static CheckmendError jsonToCheckMENDError(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, CheckmendError.class);
     }
 
-    static String generateSignatureHash(long partnerid, String secretKey,
-            String json) {
+    public static String generateSignatureHash(long partnerid,
+            String secretKey, String json) {
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("SHA-1");

@@ -4,6 +4,8 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -18,7 +20,7 @@ public class Property {
     private String description;
     private List<String> serials;
 
-    enum Category {
+    public enum Category {
         Other(0), Mobile(1), Laptop(2), Console(3), Satnav(4), Camera(5), Jewellery(
                 6);
         private int categoryCode;
@@ -38,6 +40,7 @@ public class Property {
         this.category = category;
         this.make = make;
         this.model = model;
+        description = StringEscapeUtils.escapeJava(description);
         this.description = description;
         this.serials = serials;
     }
@@ -68,6 +71,7 @@ public class Property {
 
     public String toJson() {
         Gson gson = new GsonBuilder()
+                .disableHtmlEscaping()
                 .registerTypeAdapter(Category.class,
                         new JsonSerializer<Category>() {
                             @Override

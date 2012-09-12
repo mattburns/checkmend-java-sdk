@@ -1,4 +1,4 @@
-package uk.co.mattburns.checkmend;
+package uk.co.mattburns.checkmend.differentpackage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -9,12 +9,18 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.co.mattburns.checkmend.Activity;
 import uk.co.mattburns.checkmend.Activity.ActivityType;
+import uk.co.mattburns.checkmend.Checkmend;
+import uk.co.mattburns.checkmend.CheckmendError;
+import uk.co.mattburns.checkmend.Person;
+import uk.co.mattburns.checkmend.Property;
 import uk.co.mattburns.checkmend.Property.Category;
 
 public class CheckmendTest {
 
     private long partnerid;
+    private long scfPersonid;
     private String secretKey;
 
     @Before
@@ -24,11 +30,12 @@ public class CheckmendTest {
         try {
             // load a properties file
             props.load(getClass().getResourceAsStream(
-                    "test-settings.properties"));
+                    "../test-settings.properties"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         partnerid = Long.parseLong((String) props.get("PARTNER_ID"));
+        scfPersonid = Long.parseLong((String) props.get("PERSON_ID"));
         secretKey = (String) props.get("SECRET_KEY");
     }
 
@@ -58,6 +65,23 @@ public class CheckmendTest {
         assertEquals(3, error.getErrors().get(1).getId());
         assertEquals("Another human readable message", error.getErrors().get(1)
                 .getMessage());
+
+        // @formatter:off
+        error = Checkmend.jsonToCheckMENDError("" +
+                "{" +
+                "    \"errors\":" +
+                "    [" +
+                "        {" +
+                "            \"id\":210," +
+                "            \"message\":\"The required input: make was not provided.\"" +
+                "        }" +
+                "    ]" +
+                "}");
+        // @formatter:on
+
+        assertEquals(210, error.getErrors().get(0).getId());
+        assertEquals("The required input: make was not provided.", error
+                .getErrors().get(0).getMessage());
     }
 
     @Test
@@ -116,6 +140,19 @@ public class CheckmendTest {
         } finally {
             checkmend.removePerson(personid);
         }
+    }
+
+    @Test
+    public void can_encode_strings() {
+        Checkmend checkmend = new Checkmend(partnerid, secretKey, System.out);
+
+        Property property = new Property.PropertyBuilder(scfPersonid,
+                Category.Camera, "Canon", "0480417204").withDescription(
+                "colon : and other chars !\"£$%^&*()_+‽èก").build();
+
+        long propertyid = checkmend.registerProperty(property);
+
+        checkmend.removeProperty(propertyid);
     }
 
     @Test

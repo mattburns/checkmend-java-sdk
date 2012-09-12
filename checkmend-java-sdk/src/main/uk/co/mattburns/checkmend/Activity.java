@@ -10,7 +10,7 @@ public class Activity {
     private ActivityType activity;
     private Date datetime;
 
-    enum ActivityType {
+    public enum ActivityType {
         lost, stolen, found, recovered, bought, sold;
     }
 

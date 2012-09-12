@@ -8,6 +8,7 @@
 	<classpathentry kind="lib" path="lib/jersey-core-1.12.jar"/>
 	<classpathentry kind="lib" path="lib/jersey-multipart-1.12.jar"/>
 	<classpathentry kind="lib" path="lib/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.0.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

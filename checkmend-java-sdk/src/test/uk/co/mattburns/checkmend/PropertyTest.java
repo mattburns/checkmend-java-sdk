@@ -30,4 +30,18 @@ public class PropertyTest {
                         + "\"serials\":[\"123\",\"456\"]}", property.toJson());
     }
 
+    @Test
+    public void can_serialize_unicode_to_json() {
+        Property property = new Property.PropertyBuilder(2, Category.Camera,
+                "Canon", "123")
+                .withDescription(
+                        "colon: : and thai: ก and url: https://maps.google.com/maps?z=13&t=m&q=loc:51.449776+-2.5936863")
+                .build();
+
+        assertEquals(
+                "{\"personid\":2,\"category\":\"5\",\"make\":\"Canon\","
+                        + "\"description\":\"colon: : and thai: \\\\u0E01 and url: https://maps.google.com/maps?z=13&t=m&q=loc:51.449776+-2.5936863\","
+                        + "\"serials\":\"123\"}", property.toJson());
+    }
+
 }
