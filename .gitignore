@@ -1,4 +1,5 @@
 *~
+.DS_Store
 checkmend-java-sdk/bin
 checkmend-java-sdk/ant-bin
 checkmend-java-sdk/dist

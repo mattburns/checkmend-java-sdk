@@ -5,6 +5,13 @@ A java library for communicating with the [CheckMEND API](http://gapi.checkmend.
 
 
 
+Building the jars
+-----------------
+```
+ant jar-only
+```
+
+
 Usage
 -----
 
@@ -50,4 +57,4 @@ If you want to play, you can build the jars from source using [ant](http://ant.a
 More
 ----
 
-See the [test code](https://github.com/mattburns/checkmend-java-sdk/blob/master/checkmend-java-sdk/src/test/uk/co/mattburns/checkmend/CheckmendTest.java) for more usage examples.
+See the [test code](https://github.com/mattburns/checkmend-java-sdk/blob/master/checkmend-java-sdk/src/test/uk/co/mattburns/checkmend/differentpackage/CheckmendTest.java) for more usage examples.

@@ -37,7 +37,7 @@
         <javac srcdir="${src-test}" destdir="${test-bin}" debug="true" includeantruntime="false" classpathref="test-classpath" />
     </target>
 
-    <target name="test" depends="compile">
+    <target name="test" depends="compile" description="Run the tests. Requires that you place your api credentials in test/uk/co/mattburns/checkmend/test-settings.properties">
         <mkdir dir="${results}" />
 
         <junit printsummary="yes" haltonfailure="true">
@@ -64,7 +64,10 @@
         </junitreport>
     </target>
 
-    <target name="jar" depends="clean, test" description="Build the distributable jars">
+    <target name="jar" depends="test, jar-only" description="Build the distributable jars">
+    </target>
+
+    <target name="jar-only" depends="clean, compile">
         <jar destfile="${dist-name}-${dist-version}.jar">
             <fileset dir="${ant-bin}" />
         </jar>
