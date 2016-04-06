@@ -34,14 +34,6 @@ public class CheckmendTest {
             ClassLoader classLoader = getClass().getClassLoader();
             // load a properties file
             props.load(classLoader.getResourceAsStream("test-settings.properties"));
-            while(props.propertyNames().hasMoreElements()){
-                String propName = (String) props.propertyNames().nextElement();
-                String propVal = props.getProperty(propName);
-                if(propVal.matches("\\$\\{.*\\}")){
-                    String env = propVal.replaceAll("\\$\\{(.*?)\\}", "$1");
-                    props.setProperty(propName, System.getenv(env));
-                }
-            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
