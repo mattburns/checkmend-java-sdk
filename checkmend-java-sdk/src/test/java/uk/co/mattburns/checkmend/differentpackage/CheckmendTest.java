@@ -3,7 +3,10 @@ package uk.co.mattburns.checkmend.differentpackage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.io.File;
+import java.net.URL;
 import java.util.Date;
+import java.util.Map;
 import java.util.Properties;
 
 import org.junit.Before;
@@ -28,9 +31,9 @@ public class CheckmendTest {
         Properties props = new Properties();
 
         try {
+            ClassLoader classLoader = getClass().getClassLoader();
             // load a properties file
-            props.load(getClass().getResourceAsStream(
-                    "../test-settings.properties"));
+            props.load(classLoader.getResourceAsStream("test-settings.properties"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
