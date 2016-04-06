@@ -42,7 +42,7 @@ If you want to play, you can build the jars from source using [ant](http://ant.a
 More
 ----
 
-See the [test code](https://github.com/mattburns/checkmend-java-sdk/blob/master/checkmend-java-sdk/src/test/uk/co/mattburns/checkmend/differentpackage/CheckmendTest.java) for more usage examples.
+See the [test code](https://github.com/mattburns/checkmend-java-sdk/blob/master/checkmend-java-sdk/src/test/java/uk/co/mattburns/checkmend/differentpackage/CheckmendTest.java) for more usage examples.
 
 To run the tests, you will need to create the file `checkmend-java-sdk/src/test/resources/uk/co/mattburns/checkmend/test-settings.properties` with your api keys in it and it will need to look something like this:
 
