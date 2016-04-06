@@ -1,0 +1,9 @@
+.idea
+.iml
+*.iml
+
+build
+.gradle
+
+src/test/resources
+**/*.properties
