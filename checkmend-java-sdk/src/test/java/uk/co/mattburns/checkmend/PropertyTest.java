@@ -3,14 +3,13 @@ package uk.co.mattburns.checkmend;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import uk.co.mattburns.checkmend.Property.Category;
+import uk.co.mattburns.checkmend.differentpackage.Property;
 
 public class PropertyTest {
 
     @Test
     public void can_serialize_to_json() {
-        Property property = new Property.PropertyBuilder(2, Category.Camera,
+        Property property = new Property.PropertyBuilder(2, Property.Category.Camera,
                 "Canon", "123").withModel("7D").withDescription("My camera")
                 .build();
 
@@ -21,7 +20,7 @@ public class PropertyTest {
 
     @Test
     public void multiple_serials_are_put_in_array() {
-        Property property = new Property.PropertyBuilder(2, Category.Camera,
+        Property property = new Property.PropertyBuilder(2, Property.Category.Camera,
                 "Canon", "123", "456").withModel("7D")
                 .withDescription("My camera").build();
 
@@ -32,7 +31,7 @@ public class PropertyTest {
 
     @Test
     public void can_serialize_unicode_to_json() {
-        Property property = new Property.PropertyBuilder(2, Category.Camera,
+        Property property = new Property.PropertyBuilder(2, Property.Category.Camera,
                 "Canon", "123")
                 .withDescription(
                         "colon: : and thai: ก and url: https://maps.google.com/maps?z=13&t=m&q=loc:51.449776+-2.5936863")

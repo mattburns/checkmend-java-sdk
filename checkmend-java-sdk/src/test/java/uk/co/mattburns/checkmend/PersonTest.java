@@ -5,15 +5,14 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 
 import org.junit.Test;
-
-import uk.co.mattburns.checkmend.Person.Gender;
+import uk.co.mattburns.checkmend.differentpackage.Person;
 
 public class PersonTest {
 
     @Test
     public void can_serialize_to_json() {
         Person person = new Person.PersonBuilder("123").withFamilyname("smith")
-                .withGender(Gender.Male).withOthernames("bob")
+                .withGender(Person.Gender.Male).withOthernames("bob")
                 .withDob(new Date(1l)).build();
 
         assertEquals(

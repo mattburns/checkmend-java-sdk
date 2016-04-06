@@ -1,4 +1,4 @@
-package uk.co.mattburns.checkmend;
+package uk.co.mattburns.checkmend.differentpackage;
 
 import java.util.Date;
 

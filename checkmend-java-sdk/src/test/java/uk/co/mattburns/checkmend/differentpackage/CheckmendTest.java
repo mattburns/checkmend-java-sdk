@@ -3,22 +3,17 @@ package uk.co.mattburns.checkmend.differentpackage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.io.File;
-import java.net.URL;
 import java.util.Date;
-import java.util.Map;
 import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.co.mattburns.checkmend.Activity;
-import uk.co.mattburns.checkmend.Activity.ActivityType;
-import uk.co.mattburns.checkmend.Checkmend;
-import uk.co.mattburns.checkmend.CheckmendError;
-import uk.co.mattburns.checkmend.Person;
-import uk.co.mattburns.checkmend.Property;
-import uk.co.mattburns.checkmend.Property.Category;
+import uk.co.mattburns.checkmend.differentpackage.Activity;
+import uk.co.mattburns.checkmend.differentpackage.Checkmend;
+import uk.co.mattburns.checkmend.differentpackage.CheckmendError;
+import uk.co.mattburns.checkmend.differentpackage.Person;
+import uk.co.mattburns.checkmend.differentpackage.Property;
 
 public class CheckmendTest {
 
@@ -28,18 +23,18 @@ public class CheckmendTest {
 
     @Before
     public void before() {
-        Properties props = new Properties();
+        Properties prop = new Properties();
 
         try {
-            ClassLoader classLoader = getClass().getClassLoader();
             // load a properties file
-            props.load(classLoader.getResourceAsStream("test-settings.properties"));
+            prop.load(getClass()
+                    .getResourceAsStream("test-settings.properties"));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Couldn't find test-settings.properties", e);
         }
-        partnerid = Long.parseLong((String) props.get("PARTNER_ID"));
-        scfPersonid = Long.parseLong((String) props.get("PERSON_ID"));
-        secretKey = (String) props.get("SECRET_KEY");
+        partnerid = Long.parseLong((String) prop.get("PARTNER_ID"));
+        scfPersonid = Long.parseLong((String) prop.get("PERSON_ID"));
+        secretKey = (String) prop.get("SECRET_KEY");
     }
 
     @Test
@@ -134,7 +129,7 @@ public class CheckmendTest {
 
         try {
             Property property = new Property.PropertyBuilder(personid,
-                    Category.Camera, "Canon", "123").withModel("7D")
+                    Property.Category.Camera, "Canon", "123").withModel("7D")
                     .withDescription("My camera").build();
 
             long propertyid = checkmend.registerProperty(property);
@@ -150,7 +145,7 @@ public class CheckmendTest {
         Checkmend checkmend = new Checkmend(partnerid, secretKey, System.out);
 
         Property property = new Property.PropertyBuilder(scfPersonid,
-                Category.Camera, "Canon", "0480417204").withDescription(
+                Property.Category.Camera, "Canon", "0480417204").withDescription(
                 "colon : and other chars !\"£$%^&*()_+‽èก").build();
 
         long propertyid = checkmend.registerProperty(property);
@@ -169,14 +164,14 @@ public class CheckmendTest {
 
         try {
             Property property = new Property.PropertyBuilder(personid,
-                    Category.Camera, "Canon", "123").withModel("7D")
+                    Property.Category.Camera, "Canon", "123").withModel("7D")
                     .withDescription("My camera").build();
 
             long propertyid = checkmend.registerProperty(property);
 
             try {
                 Activity activity = new Activity(propertyid,
-                        ActivityType.stolen, new Date());
+                        Activity.ActivityType.stolen, new Date());
                 checkmend.registerActivity(activity);
             } finally {
                 checkmend.removeProperty(propertyid);
