@@ -16,6 +16,12 @@ jar {
     }
 }
 
+test {
+    systemProperty "CHECKMEND_PARTNER_ID", "${CHECKMEND_PARTNER_ID}"
+    systemProperty "CHECKMEND_PERSON_ID", "${CHECKMEND_PERSON_ID}"
+    systemProperty "CHECKMEND_SECRET_KEY", "${CHECKMEND_SECRET_KEY}"
+}
+
 repositories {
     mavenLocal()
     mavenCentral()

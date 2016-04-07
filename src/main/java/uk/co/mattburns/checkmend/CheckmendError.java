@@ -1,4 +1,4 @@
-package uk.co.mattburns.checkmend.differentpackage;
+package uk.co.mattburns.checkmend;
 
 import java.util.List;
 
