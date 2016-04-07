@@ -3,7 +3,7 @@ package uk.co.mattburns.checkmend;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import uk.co.mattburns.checkmend.differentpackage.Property;
+import uk.co.mattburns.checkmend.Property;
 
 public class PropertyTest {
 

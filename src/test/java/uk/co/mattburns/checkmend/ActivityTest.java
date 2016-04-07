@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 
 import org.junit.Test;
-import uk.co.mattburns.checkmend.differentpackage.Activity;
+import uk.co.mattburns.checkmend.Activity;
 
 public class ActivityTest {
 

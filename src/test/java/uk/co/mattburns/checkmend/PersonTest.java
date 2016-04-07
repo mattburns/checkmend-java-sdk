@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 
 import org.junit.Test;
-import uk.co.mattburns.checkmend.differentpackage.Person;
+import uk.co.mattburns.checkmend.Person;
 
 public class PersonTest {
 
