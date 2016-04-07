@@ -1,4 +1,4 @@
-package uk.co.mattburns.checkmend.differentpackage;
+package uk.co.mattburns.checkmend;
 
 import java.io.PrintStream;
 import java.security.MessageDigest;

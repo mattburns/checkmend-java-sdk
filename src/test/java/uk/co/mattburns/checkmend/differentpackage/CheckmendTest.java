@@ -7,13 +7,20 @@ import java.util.Date;
 import java.util.Properties;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+<<<<<<< HEAD:checkmend-java-sdk/src/test/java/uk/co/mattburns/checkmend/differentpackage/CheckmendTest.java
 import uk.co.mattburns.checkmend.differentpackage.Activity;
 import uk.co.mattburns.checkmend.differentpackage.Checkmend;
 import uk.co.mattburns.checkmend.differentpackage.CheckmendError;
 import uk.co.mattburns.checkmend.differentpackage.Person;
 import uk.co.mattburns.checkmend.differentpackage.Property;
+=======
+import uk.co.mattburns.checkmend.*;
+import uk.co.mattburns.checkmend.Activity.ActivityType;
+import uk.co.mattburns.checkmend.Property.Category;
+>>>>>>> 1c5301b0465c29785c4a9e5e1683ad9f46fdb98b:src/test/java/uk/co/mattburns/checkmend/differentpackage/CheckmendTest.java
 
 public class CheckmendTest {
 
@@ -23,6 +30,7 @@ public class CheckmendTest {
 
     @Before
     public void before() {
+<<<<<<< HEAD:checkmend-java-sdk/src/test/java/uk/co/mattburns/checkmend/differentpackage/CheckmendTest.java
         Properties prop = new Properties();
 
         try {
@@ -35,6 +43,13 @@ public class CheckmendTest {
         partnerid = Long.parseLong((String) prop.get("PARTNER_ID"));
         scfPersonid = Long.parseLong((String) prop.get("PERSON_ID"));
         secretKey = (String) prop.get("SECRET_KEY");
+=======
+        Properties props = TestUtils.loadProps();
+
+        partnerid = Long.parseLong((String) props.get("PARTNER_ID"));
+        scfPersonid = Long.parseLong((String) props.get("PERSON_ID"));
+        secretKey = (String) props.get("SECRET_KEY");
+>>>>>>> 1c5301b0465c29785c4a9e5e1683ad9f46fdb98b:src/test/java/uk/co/mattburns/checkmend/differentpackage/CheckmendTest.java
     }
 
     @Test
