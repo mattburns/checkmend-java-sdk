@@ -1,8 +1,0 @@
-.idea
-.iml
-*.iml
-
-build
-.gradle
-
-**/test-settings.properties
