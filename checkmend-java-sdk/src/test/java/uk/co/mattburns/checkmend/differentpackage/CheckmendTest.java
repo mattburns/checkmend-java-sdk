@@ -10,14 +10,11 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import uk.co.mattburns.checkmend.Activity;
+import uk.co.mattburns.checkmend.*;
 import uk.co.mattburns.checkmend.Activity.ActivityType;
-import uk.co.mattburns.checkmend.Checkmend;
-import uk.co.mattburns.checkmend.CheckmendError;
-import uk.co.mattburns.checkmend.Person;
-import uk.co.mattburns.checkmend.Property;
 import uk.co.mattburns.checkmend.Property.Category;
 
 public class CheckmendTest {
@@ -28,15 +25,8 @@ public class CheckmendTest {
 
     @Before
     public void before() {
-        Properties props = new Properties();
+        Properties props = TestUtils.loadProps();
 
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            // load a properties file
-            props.load(classLoader.getResourceAsStream("test-settings.properties"));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
         partnerid = Long.parseLong((String) props.get("PARTNER_ID"));
         scfPersonid = Long.parseLong((String) props.get("PERSON_ID"));
         secretKey = (String) props.get("SECRET_KEY");

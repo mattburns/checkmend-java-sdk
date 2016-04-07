@@ -4,6 +4,3 @@
 
 build
 .gradle
-
-src/test/resources
-**/*.properties
